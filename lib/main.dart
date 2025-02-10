@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
+  bool _isImageLoaded = false; // Pour gérer le chargement de l'image
 
   @override
   void initState() {
@@ -58,27 +59,49 @@ class _HomePageState extends State<HomePage>
       backgroundColor: Colors.blue[50],
       body: Stack(
         children: [
-          // Arrière-plan avec l'image et l'animation de fondu
+          // Animation de l'arrière-plan avec un cadre et l'image
           FadeTransition(
             opacity: _fadeAnimation,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                      'images/image.webp'), // Remplace par ton image
-                  fit: BoxFit.cover,
+            child: Center(
+              child: AnimatedContainer(
+                duration: Duration(seconds: 2),
+                curve: Curves.easeInOut,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30), // Bord arrondi
+                  color: Colors.white.withOpacity(0.5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 10,
+                      offset: Offset(0, 10),
+                    ),
+                  ],
+                ),
+                width: 300,
+                height: 400,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                      30), // Bord arrondi pour l'image aussi
+                  child: _isImageLoaded
+                      ? Image.asset(
+                          'assets/images/image.webp', // Ton image ici
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        )
+                      : Center(
+                          child:
+                              CircularProgressIndicator(), // Affiche un loader en attendant
+                        ),
                 ),
               ),
             ),
           ),
-
-          // Contenu principal
+          // Bouton pour démarrer le quiz
           Align(
-            alignment: FractionalOffset(
-                0.5, 0.85), // Positionne le bouton à 85% de la hauteur
+            alignment: FractionalOffset(0.5, 0.85),
             child: ElevatedButton(
               onPressed: () {
-                // Action à effectuer lors du clic sur le bouton
                 print('Démarrer le quiz');
               },
               child: Text(
@@ -90,9 +113,8 @@ class _HomePageState extends State<HomePage>
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                backgroundColor:
-                    Colors.blue.withOpacity(0.8), // Couleur du bouton
-                elevation: 10, // Ombre du bouton
+                backgroundColor: Colors.blue.withOpacity(0.8),
+                elevation: 10,
               ),
             ),
           ),
