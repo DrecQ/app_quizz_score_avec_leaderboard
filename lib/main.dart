@@ -1,5 +1,5 @@
+import 'package:app_quizz_score_avec_leaderboard/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 void main() {
   runApp(MyApp());
@@ -78,13 +78,13 @@ class _HomePageState extends State<HomePage>
                   ],
                 ),
                 width: 300,
-                height: 400,
+                height: 430,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(
                       30), // Bord arrondi pour l'image aussi
                   child: _isImageLoaded
                       ? Image.asset(
-                          'assets/images/image.webp', // Ton image ici
+                          'images/img_2.jpg', // Ton image ici
                           fit: BoxFit.cover,
                           width: double.infinity,
                           height: double.infinity,
@@ -102,7 +102,11 @@ class _HomePageState extends State<HomePage>
             alignment: FractionalOffset(0.5, 0.85),
             child: ElevatedButton(
               onPressed: () {
-                print('Démarrer le quiz');
+                // Navigation vers la page MenuScreen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MenuScreen()),
+                );
               },
               child: Text(
                 'Démarrer le quiz',
