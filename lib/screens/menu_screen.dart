@@ -5,135 +5,141 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu'),
-        backgroundColor: Colors.blue,
+        title: Text(
+          'Menu',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            shadows: [
+              Shadow(
+                blurRadius: 5,
+                color: Colors.black.withOpacity(0.3),
+                offset: Offset(2, 2),
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: Colors.blue.withOpacity(0.8),
+        elevation: 10,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            // Utilisation de Expanded pour créer 4 cadres qui occupent l'écran
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  print('Jeu solo');
-                },
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 5,
-                        offset: Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Jeu Solo',
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.blue[200]!, Colors.purple[200]!],
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              // Option 1: Jeu Solo
+              Expanded(
+                child: _buildMenuButton(
+                  context,
+                  title: 'Jeu Solo',
+                  icon: Icons.person,
+                  color: Colors.blue.withOpacity(0.8),
+                  onTap: () {
+                    print('Jeu solo');
+                  },
                 ),
               ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  print('Jeu Multijoueur');
-                },
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 5,
-                        offset: Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Jeu Multijoueur',
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+              // Option 2: Jeu Multijoueur
+              Expanded(
+                child: _buildMenuButton(
+                  context,
+                  title: 'Jeu Multijoueur',
+                  icon: Icons.people,
+                  color: Colors.green.withOpacity(0.8),
+                  onTap: () {
+                    print('Jeu Multijoueur');
+                  },
                 ),
               ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  print('Tableau des Scores');
-                },
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.orange,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 5,
-                        offset: Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Tableau des Scores',
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+              // Option 3: Tableau des Scores
+              Expanded(
+                child: _buildMenuButton(
+                  context,
+                  title: 'Tableau des Scores',
+                  icon: Icons.leaderboard,
+                  color: Colors.orange.withOpacity(0.8),
+                  onTap: () {
+                    print('Tableau des Scores');
+                  },
                 ),
               ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  print('Règles du Jeu');
-                },
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.purple,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 5,
-                        offset: Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Règles du Jeu',
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+              // Option 4: Règles du Jeu
+              Expanded(
+                child: _buildMenuButton(
+                  context,
+                  title: 'Règles du Jeu',
+                  icon: Icons.rule,
+                  color: Colors.purple.withOpacity(0.8),
+                  onTap: () {
+                    print('Règles du Jeu');
+                  },
                 ),
               ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Fonction pour créer un bouton de menu stylisé
+  Widget _buildMenuButton(
+    BuildContext context, {
+    required String title,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              blurRadius: 10,
+              offset: Offset(0, 5),
             ),
           ],
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 50,
+                color: Colors.white,
+              ),
+              SizedBox(height: 10),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 5,
+                      color: Colors.black.withOpacity(0.3),
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
