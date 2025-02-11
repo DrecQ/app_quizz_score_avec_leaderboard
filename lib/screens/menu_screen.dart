@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'rules_screen.dart'; // Assurez-vous d'importer la page des règles
 
 class MenuScreen extends StatelessWidget {
   @override
@@ -79,7 +80,11 @@ class MenuScreen extends StatelessWidget {
                   icon: Icons.rule,
                   color: Colors.purple.withOpacity(0.8),
                   onTap: () {
-                    print('Règles du Jeu');
+                    // Navigation vers la page des règles
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RulesScreen()),
+                    );
                   },
                 ),
               ),
@@ -102,6 +107,7 @@ class MenuScreen extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: EdgeInsets.all(10),
+        height: 120, // Hauteur réduite des cartes
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(20),
@@ -119,14 +125,14 @@ class MenuScreen extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                size: 50,
+                size: 40, // Taille de l'icône légèrement réduite
                 color: Colors.white,
               ),
               SizedBox(height: 10),
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 22, // Taille de police légèrement réduite
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   shadows: [
