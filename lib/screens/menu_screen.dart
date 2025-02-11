@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'rules_screen.dart'; // Assurez-vous d'importer la page des règles
+import 'rules_screen.dart';
+import 'leaderboard_screen.dart';
+import 'soloGaming_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   @override
@@ -44,7 +46,10 @@ class MenuScreen extends StatelessWidget {
                   icon: Icons.person,
                   color: Colors.blue.withOpacity(0.8),
                   onTap: () {
-                    print('Jeu solo');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SoloGameScreen()),
+                    );
                   },
                 ),
               ),
@@ -68,7 +73,12 @@ class MenuScreen extends StatelessWidget {
                   icon: Icons.leaderboard,
                   color: Colors.orange.withOpacity(0.8),
                   onTap: () {
-                    print('Tableau des Scores');
+                    //Navigation vers la page des scores
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LeaderboardScreen()),
+                    );
                   },
                 ),
               ),
