@@ -1,0 +1,18 @@
+[
+    {
+      "questionText": "Quelle est la capitale de la France ?",
+      "options": ["Paris", "Londres", "Madrid", "Berlin"],
+      "correctAnswerIndex": 0
+    },
+    {
+      "questionText": "Qui a créé Flutter ?",
+      "options": ["Google", "Facebook", "Microsoft", "Apple"],
+      "correctAnswerIndex": 0
+    },
+    {
+      "questionText": "Quel est le langage principal de Flutter ?",
+      "options": ["Java", "Dart", "Swift", "Kotlin"],
+      "correctAnswerIndex": 1
+    }
+  ]
+  
