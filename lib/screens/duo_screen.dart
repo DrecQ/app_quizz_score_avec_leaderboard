@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 class DuoScreen extends StatefulWidget {
   @override
@@ -19,18 +17,6 @@ class _DuoScreenState extends State<DuoScreen> {
     Colors.blueAccent,
     Colors.blueAccent
   ];
-  String player1Name = '';
-  String player2Name = '';
-  final AudioPlayer _audioPlayer = AudioPlayer();
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final Map<String, String> playerNames =
-        ModalRoute.of(context)?.settings.arguments as Map<String, String>;
-    player1Name = playerNames['player1Name']!;
-    player2Name = playerNames['player2Name']!;
-  }
 
   List<Map<String, Object>> _questions = [
     {
@@ -54,57 +40,41 @@ class _DuoScreenState extends State<DuoScreen> {
     // Ajoute plus de questions ici
   ];
 
-  void _answerQuestion(int score, int index) async {
+  void _answerQuestion(int score, int index) {
     setState(() {
       _answered = true;
-      if (_currentPlayer == 1) {
-        if (score == 1) {
-          _answerColors[index] = Colors.green;
+      if (score == 1) {
+        _answerColors[index] = Colors.green;
+        if (_currentPlayer == 1) {
           _scorePlayer1 += score;
-          _audioPlayer.play(AssetSource('correct.mp3'));
         } else {
-          _answerColors[index] = Colors.red;
-          _audioPlayer.play(AssetSource('incorrect.mp3'));
-        }
-        _currentPlayer = 2;
-      } else {
-        if (score == 1) {
-          _answerColors[index] = Colors.green;
           _scorePlayer2 += score;
-          _audioPlayer.play(AssetSource('correct.mp3'));
-        } else {
-          _answerColors[index] = Colors.red;
-          _audioPlayer.play(AssetSource('incorrect.mp3'));
         }
-        _currentPlayer = 1;
-        _currentQuestionIndex += 1;
-
-        Future.delayed(const Duration(seconds: 2), () {
-          setState(() {
-            _answered = false;
-            _answerColors = [
-              Colors.blueAccent,
-              Colors.blueAccent,
-              Colors.blueAccent,
-              Colors.blueAccent
-            ];
-          });
-
-          if (_currentQuestionIndex >= _questions.length) {
-            _audioPlayer.play(AssetSource('end_game.mp3'));
-            Navigator.pushReplacementNamed(
-              context,
-              '/resultDuo',
-              arguments: {
-                'scorePlayer1': _scorePlayer1,
-                'scorePlayer2': _scorePlayer2,
-                'player1Name': player1Name,
-                'player2Name': player2Name
-              },
-            );
-          }
-        });
+      } else {
+        _answerColors[index] = Colors.red;
       }
+
+      Future.delayed(const Duration(seconds: 2), () {
+        setState(() {
+          _currentQuestionIndex += 1;
+          _answered = false;
+          _currentPlayer = _currentPlayer == 1 ? 2 : 1;
+          _answerColors = [
+            Colors.blueAccent,
+            Colors.blueAccent,
+            Colors.blueAccent,
+            Colors.blueAccent
+          ];
+        });
+
+        if (_currentQuestionIndex >= _questions.length) {
+          // Naviguer vers l'écran des résultats
+          Navigator.pushReplacementNamed(context, '/result', arguments: {
+            'scorePlayer1': _scorePlayer1,
+            'scorePlayer2': _scorePlayer2,
+          });
+        }
+      });
     });
   }
 
@@ -123,23 +93,6 @@ class _DuoScreenState extends State<DuoScreen> {
                   _buildQuestionBox(_questions[_currentQuestionIndex]
                       ['questionText'] as String),
                   SizedBox(height: 20),
-                  AnimatedTextKit(
-                    animatedTexts: [
-                      TypewriterAnimatedText(
-                        '${_currentPlayer == 1 ? player1Name : player2Name}, c\'est votre tour!',
-                        textStyle: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple),
-                        speed: const Duration(milliseconds: 100),
-                      ),
-                    ],
-                    totalRepeatCount: 1,
-                    pause: const Duration(milliseconds: 1000),
-                    displayFullTextOnTap: true,
-                    stopPauseOnTap: true,
-                  ),
-                  SizedBox(height: 20),
                   ...(_questions[_currentQuestionIndex]['answers']
                           as List<Map<String, Object>>)
                       .asMap()
@@ -150,6 +103,11 @@ class _DuoScreenState extends State<DuoScreen> {
                     return _buildAnswerButton(answer['text'] as String,
                         answer['score'] as int, index);
                   }).toList(),
+                  SizedBox(height: 20),
+                  Text(
+                    'C\'est le tour du joueur $_currentPlayer',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             )

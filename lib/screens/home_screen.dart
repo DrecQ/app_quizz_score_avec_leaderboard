@@ -1,51 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'player_input_screen.dart';
+import 'rules_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  void _navigateToPlayerInput(BuildContext context, bool isDuo) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PlayerInputScreen(isDuo: isDuo),
+      ),
+    );
+  }
 
-  void _playSound() async {
-    await _audioPlayer.play(AssetSource('winning.mp3'));
+  void _navigateToRules(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RulesScreen(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz App', style: GoogleFonts.lato()),
+        title: Text('Quiz Game'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              onPressed: () {
-                _playSound();
-                Navigator.pushNamed(context, '/regle');
-              },
-              child: Text('Règle du jeu'),
+              onPressed: () => _navigateToPlayerInput(context, false),
+              child: Text('Jeu en Solo'),
             ),
             ElevatedButton(
-              onPressed: () {
-                _playSound();
-                Navigator.pushNamed(context, '/solo');
-              },
-              child: Text('Jouer en solo'),
+              onPressed: () => _navigateToPlayerInput(context, true),
+              child: Text('Jeu en Duo'),
             ),
             ElevatedButton(
-              onPressed: () {
-                _playSound();
-                Navigator.pushNamed(context, '/duoSetup');
-              },
-              child: Text('Jouer en duo'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                _playSound();
-                Navigator.pushNamed(context, '/leaderboard');
-              },
-              child: Text('Score'),
+              onPressed: () => _navigateToRules(context),
+              child: Text('Règles du Jeu'),
             ),
           ],
         ),
