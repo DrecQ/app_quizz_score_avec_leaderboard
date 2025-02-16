@@ -1,3 +1,4 @@
+import 'package:app_quizz_score_avec_leaderboard/screens/multiPlayer_screen.dart';
 import 'package:flutter/material.dart';
 import 'rules_screen.dart';
 import 'leaderboard_screen.dart';
@@ -61,7 +62,11 @@ class MenuScreen extends StatelessWidget {
                   icon: Icons.people,
                   color: Colors.green.withOpacity(0.8),
                   onTap: () {
-                    print('Jeu Multijoueur');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MultiPlayerScreen()),
+                    );
                   },
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SoloGameScreen extends StatefulWidget {
   @override
@@ -11,6 +12,8 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
   int _timeLeft = 10; // Temps pour chaque question
   bool _isAnswered = false;
   bool _gameStarted = false; // Pour gérer l'état de démarrage du jeu
+  String _playerName = ''; // Nom du joueur
+  final TextEditingController _nameController = TextEditingController();
 
   // Données factices pour les questions
   final List<Map<String, dynamic>> questions = [
@@ -59,6 +62,7 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
       _startTimer();
     } else {
       // Fin du jeu
+      _saveScore();
       _showGameOverDialog();
     }
   }
@@ -83,14 +87,21 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
       builder: (context) {
         return AlertDialog(
           title: Text('Fin du jeu !'),
-          content: Text('Votre score final est : $_score points'),
+          content: Text('$_playerName, votre score final est : $_score points'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context); // Fermer la boîte de dialogue
                 Navigator.pop(context); // Retour au menu
               },
-              child: Text('OK'),
+              child: Text('Revenir au menu'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Fermer la boîte de dialogue
+                _restartGame(); // Recommencer le jeu
+              },
+              child: Text('Recommencer'),
             ),
           ],
         );
@@ -98,8 +109,27 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
     );
   }
 
-  void _startGame() {
+  void _restartGame() {
     setState(() {
+      _gameStarted = false;
+      _currentQuestionIndex = 0;
+      _score = 0;
+      _timeLeft = 10;
+      _isAnswered = false;
+      _playerName = '';
+      _nameController.clear();
+    });
+  }
+
+  void _startGame() {
+    if (_nameController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Veuillez entrer votre nom')),
+      );
+      return;
+    }
+    setState(() {
+      _playerName = _nameController.text;
       _gameStarted = true;
       _currentQuestionIndex = 0;
       _score = 0;
@@ -107,6 +137,26 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
       _isAnswered = false;
     });
     _startTimer();
+  }
+
+  Future<void> _saveScore() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> scores = prefs.getStringList('scores') ?? [];
+    scores.add('$_playerName:$_score');
+    scores.sort((a, b) {
+      int scoreA = int.parse(a.split(':')[1]);
+      int scoreB = int.parse(b.split(':')[1]);
+      return scoreB.compareTo(scoreA); // Tri décroissant
+    });
+    if (scores.length > 10) {
+      scores = scores.sublist(0, 10); // Garder seulement les 10 meilleurs scores
+    }
+    await prefs.setStringList('scores', scores);
+  }
+
+  Future<List<String>> _getTopScores() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('scores') ?? [];
   }
 
   @override
@@ -184,17 +234,21 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
                     // Question
                     Card(
                       margin: EdgeInsets.all(10),
-                      elevation: 5,
+                      elevation: 10, // Ombre plus prononcée
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(20), // Bordures plus arrondies
+                        side: BorderSide(
+                          color: Colors.blue.withOpacity(0.5), // Bordure colorée
+                          width: 2,
+                        ),
                       ),
                       child: Container(
                         width: double.infinity,
-                        padding: EdgeInsets.all(20),
+                        padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20), // Padding augmenté
                         child: Text(
                           questions[_currentQuestionIndex]['question'],
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 26, // Taille de police augmentée
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
                           ),
@@ -240,27 +294,37 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
                     ),
                   ],
                 )
-              : Center(
-                  // Bouton "Commencer la partie"
-                  child: ElevatedButton(
-                    onPressed: _startGame,
-                    child: Text(
-                      'Commencer la partie',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Entrez votre nom',
+                        border: OutlineInputBorder(),
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: _startGame,
+                      child: Text(
+                        'Commencer la partie',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                      backgroundColor: Colors.blue.withOpacity(0.8),
-                      elevation: 10,
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        backgroundColor: Colors.blue.withOpacity(0.8),
+                        elevation: 10,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
         ),
       ),
