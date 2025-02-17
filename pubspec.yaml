@@ -65,6 +65,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - images/img_2.jpg
+    #- /assets/questions.json
     # - images/img_1.jpg
     # - images/img_3.jpg
 

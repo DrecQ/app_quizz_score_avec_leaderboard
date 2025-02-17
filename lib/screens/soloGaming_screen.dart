@@ -71,7 +71,8 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
     if (!_isAnswered) {
       setState(() {
         _isAnswered = true;
-        if (selectedAnswer == questions[_currentQuestionIndex]['correctAnswer']) {
+        if (selectedAnswer ==
+            questions[_currentQuestionIndex]['correctAnswer']) {
           _score += 10;
         }
       });
@@ -149,7 +150,8 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
       return scoreB.compareTo(scoreA); // Tri décroissant
     });
     if (scores.length > 10) {
-      scores = scores.sublist(0, 10); // Garder seulement les 10 meilleurs scores
+      scores =
+          scores.sublist(0, 10); // Garder seulement les 10 meilleurs scores
     }
     await prefs.setStringList('scores', scores);
   }
@@ -236,15 +238,18 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
                       margin: EdgeInsets.all(10),
                       elevation: 10, // Ombre plus prononcée
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20), // Bordures plus arrondies
+                        borderRadius: BorderRadius.circular(
+                            20), // Bordures plus arrondies
                         side: BorderSide(
-                          color: Colors.blue.withOpacity(0.5), // Bordure colorée
+                          color:
+                              Colors.blue.withOpacity(0.5), // Bordure colorée
                           width: 2,
                         ),
                       ),
                       child: Container(
                         width: double.infinity,
-                        padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20), // Padding augmenté
+                        padding: EdgeInsets.symmetric(
+                            vertical: 30, horizontal: 20), // Padding augmenté
                         child: Text(
                           questions[_currentQuestionIndex]['question'],
                           style: TextStyle(
@@ -260,10 +265,13 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
                     // Options de réponse
                     Expanded(
                       child: ListView.builder(
-                        itemCount: questions[_currentQuestionIndex]['options'].length,
+                        itemCount:
+                            questions[_currentQuestionIndex]['options'].length,
                         itemBuilder: (context, index) {
-                          String option = questions[_currentQuestionIndex]['options'][index];
-                          String optionLabel = String.fromCharCode(65 + index); // A, B, C, D
+                          String option = questions[_currentQuestionIndex]
+                              ['options'][index];
+                          String optionLabel =
+                              String.fromCharCode(65 + index); // A, B, C, D
                           return GestureDetector(
                             onTap: () => _checkAnswer(option),
                             child: Card(
@@ -280,7 +288,9 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: _isAnswered
-                                        ? (option == questions[_currentQuestionIndex]['correctAnswer']
+                                        ? (option ==
+                                                questions[_currentQuestionIndex]
+                                                    ['correctAnswer']
                                             ? Colors.green
                                             : Colors.red)
                                         : Colors.black87,
@@ -316,7 +326,8 @@ class _SoloGameScreenState extends State<SoloGameScreen> {
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),

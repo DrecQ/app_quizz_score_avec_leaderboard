@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class LeaderboardScreen extends StatelessWidget {
   // Données factices pour le tableau des scores
   final List<Map<String, dynamic>> scores = [
-    {'name': 'Alice', 'score': 1200, 'rank': 1},
-    {'name': 'Bob', 'score': 1100, 'rank': 2},
-    {'name': 'Charlie', 'score': 1000, 'rank': 3},
-    {'name': 'David', 'score': 950, 'rank': 4},
-    {'name': 'Eve', 'score': 900, 'rank': 5},
+    {'name': 'Alice', 'score': 20, 'rank': 1},
+    {'name': 'Bob', 'score': 10, 'rank': 2},
+    {'name': 'Charlie', 'score': 10, 'rank': 3},
+    {'name': 'David', 'score': 00, 'rank': 4},
+    {'name': 'Eve', 'score': 00, 'rank': 5},
   ];
 
   @override
@@ -131,7 +131,8 @@ class LeaderboardScreen extends StatelessWidget {
   }
 
   // Carte pour afficher un score individuel
-  Widget _buildScoreCard({required int rank, required String name, required int score}) {
+  Widget _buildScoreCard(
+      {required int rank, required String name, required int score}) {
     return Card(
       margin: EdgeInsets.only(bottom: 10),
       elevation: 5,
