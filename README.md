@@ -1,6 +1,6 @@
 # app_quizz_score_avec_leaderboard
 
-A new Flutter project.
+Ceci est une appliaction flutter de quizz avec un tableau des scores !
 
 ## Membres du groupe 
 
@@ -12,9 +12,7 @@ A new Flutter project.
 
 ## Rendu du projet 
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
+Les photos suivantes sont les interfaces de notre projet. 
 
 - [](images) ![](images/home.jpg)
 - ![](images/menu.jpg)
