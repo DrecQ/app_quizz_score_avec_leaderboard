@@ -16,11 +16,11 @@ This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
-- [Acceuil](images) ![](images/home.jpg)
-- ![Menu](images/menu.jpg)
-- ![Enregistrement joueur](images/nom.jpg)
+- [](images) ![](images/home.jpg)
+- ![](images/menu.jpg)
+- ![](images/nom.jpg)
 - ![](images/nom2.jpg)
-- ![Quizz game solo](images/quizSolo.jpg)
-- ![Leaderboard](images/score-top.jpg)
-- ![Quizz game multijoueur](images/multijoueur.jpg)
-- ![Règles de jeu](images/rules.jpg) 
+- ![](images/quizSolo.jpg)
+- ![](images/score-top.jpg)
+- ![](images/multijoueur.jpg)
+- ![](images/rules.jpg) 
