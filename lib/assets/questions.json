@@ -1,0 +1,128 @@
+[
+    {
+      "question": "Quelle est la capitale de la France ?",
+      "options": ["Paris", "Londres", "Berlin", "Madrid"],
+      "correctAnswer": "Paris"
+    },
+    {
+      "question": "Quel est le plus grand océan du monde ?",
+      "options": ["Atlantique", "Indien", "Pacifique", "Arctique"],
+      "correctAnswer": "Pacifique"
+    },
+    {
+      "question": "Qui a peint la Joconde ?",
+      "options": ["Van Gogh", "Picasso", "Leonardo da Vinci", "Monet"],
+      "correctAnswer": "Leonardo da Vinci"
+    },
+    {
+      "question": "Quel est le symbole chimique de l'eau ?",
+      "options": ["O2", "H2O", "CO2", "NaCl"],
+      "correctAnswer": "H2O"
+    },
+    {
+      "question": "En quelle année a eu lieu la Révolution française ?",
+      "options": ["1776", "1789", "1815", "1848"],
+      "correctAnswer": "1789"
+    },
+    {
+      "question": "Quelle planète est la plus proche du Soleil ?",
+      "options": ["Terre", "Vénus", "Mars", "Mercure"],
+      "correctAnswer": "Mercure"
+    },
+    {
+      "question": "Qui a écrit 'Les Misérables' ?",
+      "options": ["Victor Hugo", "Émile Zola", "Gustave Flaubert", "Molière"],
+      "correctAnswer": "Victor Hugo"
+    },
+    {
+      "question": "Quel est l'élément chimique dont le symbole est 'Fe' ?",
+      "options": ["Fer", "Fluor", "Francium", "Fermium"],
+      "correctAnswer": "Fer"
+    },
+    {
+      "question": "Combien y a-t-il de continents sur Terre ?",
+      "options": ["5", "6", "7", "8"],
+      "correctAnswer": "7"
+    },
+    {
+      "question": "Quel est l'animal terrestre le plus rapide ?",
+      "options": ["Guépard", "Lion", "Antilope", "Léopard"],
+      "correctAnswer": "Guépard"
+    },
+    {
+      "question": "Quelle est la capitale du Japon ?",
+      "options": ["Tokyo", "Kyoto", "Osaka", "Hiroshima"],
+      "correctAnswer": "Tokyo"
+    },
+    {
+      "question": "Qui a découvert la gravité ?",
+      "options": ["Newton", "Einstein", "Galilée", "Tesla"],
+      "correctAnswer": "Newton"
+    },
+    {
+      "question": "Combien de côtés a un hexagone ?",
+      "options": ["4", "5", "6", "7"],
+      "correctAnswer": "6"
+    },
+    {
+      "question": "Quel est l’organe principal du système circulatoire ?",
+      "options": ["Poumon", "Cerveau", "Cœur", "Foie"],
+      "correctAnswer": "Cœur"
+    },
+    {
+      "question": "Quelle est la monnaie du Royaume-Uni ?",
+      "options": ["Euro", "Dollar", "Livre sterling", "Yen"],
+      "correctAnswer": "Livre sterling"
+    },
+    {
+      "question": "Qui a écrit 'Roméo et Juliette' ?",
+      "options": ["Shakespeare", "Molière", "Victor Hugo", "Dante"],
+      "correctAnswer": "Shakespeare"
+    },
+    {
+      "question": "Quel est le plus grand désert du monde ?",
+      "options": ["Sahara", "Gobi", "Kalahari", "Antarctique"],
+      "correctAnswer": "Antarctique"
+    },
+    {
+      "question": "Quel est le plus long fleuve du monde ?",
+      "options": ["Nil", "Amazone", "Yangtsé", "Mississippi"],
+      "correctAnswer": "Amazone"
+    },
+    {
+      "question": "Quelle est la langue la plus parlée au monde ?",
+      "options": ["Anglais", "Espagnol", "Chinois", "Français"],
+      "correctAnswer": "Chinois"
+    },
+    {
+      "question": "Quelle est la capitale du Canada ?",
+      "options": ["Toronto", "Vancouver", "Ottawa", "Montréal"],
+      "correctAnswer": "Ottawa"
+    },
+    {
+      "question": "Quel langage est principalement utilisé pour le développement web côté client ?",
+      "options": ["Python", "JavaScript", "C++", "Java"],
+      "correctAnswer": "JavaScript"
+    },
+    {
+      "question": "Quel est le système d'exploitation open-source le plus populaire ?",
+      "options": ["Windows", "macOS", "Linux", "Unix"],
+      "correctAnswer": "Linux"
+    },
+    {
+      "question": "Quel protocole est utilisé pour sécuriser les sites web ?",
+      "options": ["HTTP", "FTP", "SSH", "HTTPS"],
+      "correctAnswer": "HTTPS"
+    },
+    {
+      "question": "Que signifie SQL ?",
+      "options": ["Structured Query Language", "Simple Query Language", "Secure Query Language", "Sequential Query Language"],
+      "correctAnswer": "Structured Query Language"
+    },
+    {
+      "question": "Quel est le langage principal utilisé pour Android ?",
+      "options": ["Swift", "Kotlin", "C#", "Ruby"],
+      "correctAnswer": "Kotlin"
+    }
+  ]
+  
